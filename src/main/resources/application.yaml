@@ -12,7 +12,7 @@ spring:
                 current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
                 format_sql: true
         hibernate:
-          ddl-auto: create-drop
+          ddl-auto: update
 
 logging:
 
