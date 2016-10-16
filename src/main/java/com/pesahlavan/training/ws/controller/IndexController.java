@@ -4,13 +4,13 @@ package com.pesahlavan.training.ws.controller;
 import com.pesahlavan.training.javafx.entity.Person;
 import com.pesahlavan.training.javafx.repository.PersonRepository;
 import com.pesahlavan.training.javafx.service.ListWrapper;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping (value = "/addressbook")
@@ -18,6 +18,31 @@ public class IndexController {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @RequestMapping (value = "/addOrUpdate", method = RequestMethod.POST)
+    public boolean addOrUpdate(@RequestBody Person person) {
+        try {
+            personRepository.save(person);
+
+        }catch (Exception e){
+            LoggerFactory.getLogger(IndexController.class.getName()).error(e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    @RequestMapping (value = "/delete")
+    public boolean delete(@RequestParam(value="id", defaultValue="0") int id) {
+        try {
+            personRepository.delete(id);
+        }catch (Exception e){
+            LoggerFactory.getLogger(IndexController.class.getName()).error(e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
 
 
     @RequestMapping (value = "/all")
