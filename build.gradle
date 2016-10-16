@@ -15,6 +15,7 @@ apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 
+ext['hibernate.version'] = '5.2.2.Final'
 
 war {
 	baseName = 'rest_adrbook_springboot_jfx'
@@ -43,11 +44,10 @@ dependencies {
 
     compile ('com.pesahlavan.training.javafx:addressbookspringboot:+'){
         exclude group: 'org.springframework.boot'
-        exclude group: 'org.controlsfx'
         exclude group: 'org.xerial'
     }
 
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.2.Final'
-
+    compile ("org.springframework.boot:spring-boot-devtools")
 
 }
