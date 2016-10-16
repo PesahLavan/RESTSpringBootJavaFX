@@ -20,7 +20,7 @@ logging:
 
     level:
         ROOT: WARN
-        org.springframework: INFO
+        org.springframework: debug
         org.hibernate: debug
         org.hibernate.type.descriptor.sql: trace
 
